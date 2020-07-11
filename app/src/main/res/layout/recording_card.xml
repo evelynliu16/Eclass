@@ -25,13 +25,13 @@
         android:fontFamily="@font/lobster_two_bold"
         android:text="Video"
         android:color="@style/VideoTextColor"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/recVideo"
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_height="300dp"
+        android:layout_marginTop="25dp"
+        android:layout_height="250dp"
         app:use_controller="true"
         app:resize_mode="fill"/>
 

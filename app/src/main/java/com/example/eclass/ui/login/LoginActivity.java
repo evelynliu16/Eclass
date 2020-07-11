@@ -148,6 +148,9 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 User user = snapshot.child(phoneNumber).getValue(User.class);
                                 if (PIN.equals(user.getPassword())) {
+                                    String welcome = getString(R.string.welcome) + user.getName();
+                                    Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
                                     goToMainActivity();
                                 } else {
                                     String msg = "Incorrect password";
@@ -174,7 +177,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 

@@ -2,8 +2,12 @@ package com.example.eclass.ui.recording;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,8 +19,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
-import java.util.ArrayList;
 
 public class RecordingFragment extends Fragment {
 
@@ -38,10 +42,7 @@ public class RecordingFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Video");
 
-        /*
-        RecordingAdapter ra = new RecordingAdapter(this.getActivity(), createArrayList(20));
-        mRecyclerView.setAdapter(ra);
-        */
+        setHasOptionsMenu(true);
 
         return root;
     }
@@ -66,24 +67,58 @@ public class RecordingFragment extends Fragment {
 
                     @Override
                     protected void onBindViewHolder(@NonNull RecordingHolder recordingHolder, int i, @NonNull Model model) {
-                        recordingHolder.setExoplayer(getActivity().getApplication(), model.getName(), model.getUrl());
+                        recordingHolder.setExoplayer(getActivity().getApplication(), model.getTitle(), model.getUrl());
                     }
                 };
         firebaseRecycleAdapter.startListening();
         mRecyclerView.setAdapter(firebaseRecycleAdapter);
     }
 
-    private ArrayList<Model> createArrayList(int size) {
+    private void firebaseSearch(String text) {
+        String query = text.toLowerCase();
+        Query firebaseQuery = databaseReference.orderByChild("search").startAt(query).endAt(query + "\uf8ff");
 
-        ArrayList<Model> result = new ArrayList();
-        for (int i = 1; i <= size; i++) {
-            Model ci = new Model();
+        FirebaseRecyclerOptions<Model> options = new FirebaseRecyclerOptions.Builder<Model>()
+                .setQuery(firebaseQuery, Model.class).build();
 
-            result.add(ci);
+        FirebaseRecyclerAdapter<Model, RecordingHolder> firebaseRecycleAdapter =
+                new FirebaseRecyclerAdapter<Model, RecordingHolder>(options) {
+                    @NonNull
+                    @Override
+                    public RecordingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater.from(parent.getContext())
+                                .inflate(R.layout.recording_card, parent, false);
 
-        }
+                        return new RecordingHolder(view);
+                    }
 
-        return result;
+                    @Override
+                    protected void onBindViewHolder(@NonNull RecordingHolder recordingHolder, int i, @NonNull Model model) {
+                        recordingHolder.setExoplayer(getActivity().getApplication(), model.getTitle(), model.getUrl());
+                    }
+                };
+        firebaseRecycleAdapter.startListening();
+        mRecyclerView.setAdapter(firebaseRecycleAdapter);
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.recording, menu);
+        MenuItem item = menu.findItem(R.id.recSearch);
+
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                firebaseSearch(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                firebaseSearch(newText);
+                return false;
+            }
+        });
+    }
 }
