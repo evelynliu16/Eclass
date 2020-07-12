@@ -33,19 +33,15 @@ public class UserInfoActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("Student");
 
         //Register the user and direct to main activity.
-        register.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (name.getText().toString().equals("")) {
-                    String msg = "Please enter your name";
-                    Toast.makeText(UserInfoActivity.this, msg, Toast.LENGTH_SHORT).show();
-                } else if (password.getText().toString().equals("")) {
-                    String msg = "Please set your password";
-                    Toast.makeText(UserInfoActivity.this, msg, Toast.LENGTH_SHORT).show();
-                } else {
-                    saveUser(name.getText().toString(), phone, password.getText().toString());
-                }
+        register.setOnClickListener(v -> {
+            if (name.getText().toString().equals("")) {
+                String msg = "Please enter your name";
+                Toast.makeText(UserInfoActivity.this, msg, Toast.LENGTH_SHORT).show();
+            } else if (password.getText().toString().equals("")) {
+                String msg = "Please set your password";
+                Toast.makeText(UserInfoActivity.this, msg, Toast.LENGTH_SHORT).show();
+            } else {
+                saveUser(name.getText().toString(), phone, password.getText().toString());
             }
         });
     }

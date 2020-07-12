@@ -170,6 +170,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
+                            finish();
                         } else {
                             //verification unsuccessful.. display an error message
                             String message = "Something is wrong, we will fix it soon";

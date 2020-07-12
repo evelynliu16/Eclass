@@ -4,30 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    android:background="@drawable/fragment_background"
+    tools:context=".HomeworkFragment">
 
     <TextView
         android:id="@+id/hmHomework"
-        android:layout_width="109dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="@string/homework"
-        android:textStyle="italic"
+        android:textColor="@color/primaryTextColor"
         android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/hmContent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/hmContent"
-        android:layout_width="322dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="55dp"
         android:gravity="center_horizontal"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,11 +41,11 @@
 
     <CalendarView
         android:id="@+id/hmCalender"
-        android:layout_width="356dp"
-        android:layout_height="303dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
