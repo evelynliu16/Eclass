@@ -53,6 +53,7 @@ public class HomeworkFragment extends Fragment {
             }
         });
 
+        /** Set calender view. **/
         calender.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             final String date = formatDate(year, month, dayOfMonth);
             mDatabase.addValueEventListener(new ValueEventListener() {
@@ -76,7 +77,7 @@ public class HomeworkFragment extends Fragment {
         return root;
     }
 
-    //Format the date given to the correct form that can be used for search in the database//
+    /** Format the date given to the correct form that can be used for search in the database. **/
     private String formatDate(int year, int month, int day) {
         String mon = Integer.toString(month + 1);
         String d = Integer.toString(day);

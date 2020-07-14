@@ -2,7 +2,6 @@ package com.example.eclass;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,7 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText phone, password;
-    private Button signinButton, registerButton;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
 
@@ -33,9 +31,10 @@ public class LoginActivity extends AppCompatActivity {
 
         phone = findViewById(R.id.lgEditPhone);
         password = findViewById(R.id.lgEditPassword);
-        signinButton = findViewById(R.id.lgSignIn);
-        registerButton = findViewById(R.id.lgRegister);
+        Button signinButton = findViewById(R.id.lgSignIn);
+        Button registerButton = findViewById(R.id.lgRegister);
 
+        // Sign in. //
         signinButton.setOnClickListener(v -> {
             if (phone.getText().toString().equals("")) {
                 String msg = "Please enter your phone number";
@@ -75,14 +74,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToRegisterActivity();
-            }
-        });
+        // Register. //
+        registerButton.setOnClickListener(v -> goToRegisterActivity());
     }
 
+
+    /**
+     * Go to main activity.
+     **/
     private void goToMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);

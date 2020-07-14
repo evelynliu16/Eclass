@@ -70,10 +70,12 @@ public class RecordingFragment extends Fragment {
                         recordingHolder.setExoplayer(getActivity().getApplication(), model.getTitle(), model.getUrl());
                     }
                 };
+
         firebaseRecycleAdapter.startListening();
         mRecyclerView.setAdapter(firebaseRecycleAdapter);
     }
 
+    /** Implement search view. **/
     private void firebaseSearch(String text) {
         String query = text.toLowerCase();
         Query firebaseQuery = databaseReference.orderByChild("search").startAt(query).endAt(query + "\uf8ff");

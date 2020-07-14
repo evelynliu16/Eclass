@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
     Button logOut;
 
     @Override
@@ -37,47 +36,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference("Video");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headView = navigationView.getHeaderView(0);
         ImageView imgProfile = headView.findViewById(R.id.navPic);
         TextView name = headView.findViewById(R.id.navName);
 
-        imgProfile.setOnClickListener(new View.OnClickListener() {
+        // Change profile picture. //
+        imgProfile.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
-
-            }
         });
 
         logOut = headView.findViewById(R.id.navLogOut);
-        logOut.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent toMain = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(toMain);
-            }
+        logOut.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent toMain = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(toMain);
         });
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        // Passing each menu ID as a set of Ids because each menu should be considered as top level destinations. //
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_homework, R.id.nav_gallery, R.id.nav_recording)
+                R.id.nav_homework, R.id.nav_question, R.id.nav_recording)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -85,9 +70,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    /**
+     * Create toolbar.
+     **/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
         return true;

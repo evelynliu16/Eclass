@@ -20,7 +20,6 @@
         android:layout_marginBottom="2dp"
         android:fontFamily="@font/lobster_two_bold"
         android:textColor="@color/primaryTextColor"
-        android:color="@style/VideoTextColor"
         android:textSize="18sp" />
 
     <com.google.android.exoplayer2.ui.PlayerView

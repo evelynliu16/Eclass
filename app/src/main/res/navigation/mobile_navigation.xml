@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_homework" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.eclass.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_question"
+        android:name="com.example.eclass.QuestionFragment"
+        android:label="@string/menu_question"
+        tools:layout="@layout/fragment_question" />
 
     <fragment
         android:id="@+id/nav_recording"

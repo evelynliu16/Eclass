@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Student");
 
-        //Send the verification code if a valid phone number is provided.
+        /** Send the verification code if a valid phone number is provided. **/
         sendOPT.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        //Verify and register the user.
+        /** Verify and register the user. **/
         verify.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    //Send the verification code to the user.
+    /** Send the verification code to the user. **/
     private void sendMsg(String number) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber("+1" + number, 60, TimeUnit.SECONDS, this, mCallbacks);
     }
@@ -147,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
-    //Verify the code sent to the user.
+    /** Verify the code sent to the user. **/
     private void verifyVerificationCode(String code) {
         mAuth = FirebaseAuth.getInstance();
 
@@ -155,7 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
         verifyWithPhoneAuthCredential(crendential);
     }
 
-    //Verify the user. Register and sign in if the code is correct, display error messages otherwise.
+    /** Verify the user. Register and sign in if the code is correct, display error messages otherwise. **/
     private void verifyWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential).addOnCompleteListener(RegisterActivity.this,
                 new OnCompleteListener<AuthResult>() {
