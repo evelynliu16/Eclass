@@ -1,4 +1,4 @@
-package com.example.eclass;
+package com.example.eclass.question;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;

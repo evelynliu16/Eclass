@@ -1,4 +1,4 @@
-package com.example.eclass.ui.recording;
+package com.example.eclass.recording;
 
 import android.app.Application;
 import android.net.Uri;

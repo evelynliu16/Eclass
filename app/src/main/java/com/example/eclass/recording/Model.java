@@ -1,4 +1,4 @@
-package com.example.eclass.ui.recording;
+package com.example.eclass.recording;
 
 public class Model {
 

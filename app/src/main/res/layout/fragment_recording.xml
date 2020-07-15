@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="#e1f5fe"
-    tools:context=".ui.recording.RecordingFragment">
+    tools:context=".recording.RecordingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recRecycle"
