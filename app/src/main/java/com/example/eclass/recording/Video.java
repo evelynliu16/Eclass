@@ -1,11 +1,11 @@
 package com.example.eclass.recording;
 
-public class Model {
+public class Video {
 
     private String title;
     private String url;
 
-    public Model() {
+    public Video() {
         this.url = url;
         this.title = title;
     }

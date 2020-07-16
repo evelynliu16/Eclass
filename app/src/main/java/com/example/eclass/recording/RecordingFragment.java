@@ -51,22 +51,22 @@ public class RecordingFragment extends Fragment {
     public void onStart() {
 
         super.onStart();
-        FirebaseRecyclerOptions<Model> options = new FirebaseRecyclerOptions.Builder<Model>()
-                .setQuery(databaseReference, Model.class).build();
+        FirebaseRecyclerOptions<Video> options = new FirebaseRecyclerOptions.Builder<Video>()
+                .setQuery(databaseReference, Video.class).build();
 
-        FirebaseRecyclerAdapter<Model, RecordingHolder> firebaseRecycleAdapter =
-                new FirebaseRecyclerAdapter<Model, RecordingHolder>(options) {
+        FirebaseRecyclerAdapter<Video, RecordingHolder> firebaseRecycleAdapter =
+                new FirebaseRecyclerAdapter<Video, RecordingHolder>(options) {
                     @NonNull
                     @Override
                     public RecordingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                         View view = LayoutInflater.from(getActivity())
-                                .inflate(R.layout.recording_card, (ViewGroup) root, false);
+                                .inflate(R.layout.recording_card, parent, false);
 
                         return new RecordingHolder(view);
                     }
 
                     @Override
-                    protected void onBindViewHolder(@NonNull RecordingHolder recordingHolder, int i, @NonNull Model model) {
+                    protected void onBindViewHolder(@NonNull RecordingHolder recordingHolder, int i, @NonNull Video model) {
                         recordingHolder.setExoplayer(getActivity().getApplication(), model.getTitle(), model.getUrl());
                     }
                 };
@@ -80,11 +80,11 @@ public class RecordingFragment extends Fragment {
         String query = text.toLowerCase();
         Query firebaseQuery = databaseReference.orderByChild("search").startAt(query).endAt(query + "\uf8ff");
 
-        FirebaseRecyclerOptions<Model> options = new FirebaseRecyclerOptions.Builder<Model>()
-                .setQuery(firebaseQuery, Model.class).build();
+        FirebaseRecyclerOptions<Video> options = new FirebaseRecyclerOptions.Builder<Video>()
+                .setQuery(firebaseQuery, Video.class).build();
 
-        FirebaseRecyclerAdapter<Model, RecordingHolder> firebaseRecycleAdapter =
-                new FirebaseRecyclerAdapter<Model, RecordingHolder>(options) {
+        FirebaseRecyclerAdapter<Video, RecordingHolder> firebaseRecycleAdapter =
+                new FirebaseRecyclerAdapter<Video, RecordingHolder>(options) {
                     @NonNull
                     @Override
                     public RecordingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -95,7 +95,7 @@ public class RecordingFragment extends Fragment {
                     }
 
                     @Override
-                    protected void onBindViewHolder(@NonNull RecordingHolder recordingHolder, int i, @NonNull Model model) {
+                    protected void onBindViewHolder(@NonNull RecordingHolder recordingHolder, int i, @NonNull Video model) {
                         recordingHolder.setExoplayer(getActivity().getApplication(), model.getTitle(), model.getUrl());
                     }
                 };

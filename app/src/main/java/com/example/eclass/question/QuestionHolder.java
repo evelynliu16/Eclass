@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eclass.R;
 
-public class QuestionViewHolder extends RecyclerView.ViewHolder{
+public class QuestionHolder extends RecyclerView.ViewHolder{
 
     TextView mTitle, mDescrip;
     CheckBox answered;
 
-    public QuestionViewHolder(@NonNull View itemView) {
+    public QuestionHolder(@NonNull View itemView) {
         super(itemView);
-        mTitle = itemView.findViewById(R.id.quesTitle);
-        mDescrip = itemView.findViewById(R.id.quesDescrip);
-        answered = itemView.findViewById(R.id.quesCheckbox);
+        mTitle = itemView.findViewById(R.id.queslistTitle);
+        mDescrip = itemView.findViewById(R.id.queslistDescrip);
+        answered = itemView.findViewById(R.id.queslistCheckbox);
     }
 
     public void setQuestion(String title, String description, boolean answer) {

@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
-    android:background="@drawable/fragment_background"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -16,7 +15,7 @@
         android:layout_gravity="start"/>
 
     <TextView
-        android:id="@+id/quesTitle"
+        android:id="@+id/queslistTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -26,11 +25,10 @@
         android:layout_marginEnd="150dp"
         android:fontFamily="@font/lobster_two_bold"
         android:textColor="@color/primaryTextColor"
-        android:text="Title"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/quesDescrip"
+        android:id="@+id/queslistDescrip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -40,12 +38,11 @@
         android:layout_marginRight="150dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/buenard"
-        android:text="Question"
         android:textColor="@color/primaryTextColor"
         android:textSize="18sp" />
 
     <CheckBox
-        android:id="@+id/quesCheckbox"
+        android:id="@+id/queslistCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"

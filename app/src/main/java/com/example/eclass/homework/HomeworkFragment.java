@@ -54,7 +54,7 @@ public class HomeworkFragment extends Fragment {
             }
         });
 
-        /** Set calender view. **/
+        // Set calender view. //
         calender.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             final String date = formatDate(year, month, dayOfMonth);
             mDatabase.addValueEventListener(new ValueEventListener() {

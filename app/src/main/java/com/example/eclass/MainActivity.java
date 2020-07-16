@@ -21,8 +21,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Passing each menu ID as a set of Ids because each menu should be considered as top level destinations. //
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_homework, R.id.nav_question, R.id.nav_recording)
+                R.id.nav_homework, R.id.nav_question_list, R.id.nav_recording)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

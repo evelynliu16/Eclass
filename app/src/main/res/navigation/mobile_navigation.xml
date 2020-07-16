@@ -12,14 +12,15 @@
         tools:layout="@layout/fragment_homework" />
 
     <fragment
-        android:id="@+id/nav_question"
-        android:name="com.example.eclass.question.QuestionFragment"
+        android:id="@+id/nav_question_list"
+        android:name="com.example.eclass.question.QuestionListFragment"
         android:label="@string/menu_question"
-        tools:layout="@layout/fragment_question" />
+        tools:layout="@layout/fragment_question_list" />
 
     <fragment
         android:id="@+id/nav_recording"
         android:name="com.example.eclass.recording.RecordingFragment"
         android:label="@string/menu_recording"
         tools:layout="@layout/fragment_recording" />
+
 </navigation>

@@ -1,14 +1,13 @@
 package com.example.eclass.question;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class Question {
     private String name;
     private String title;
     private String description;
     private String answer;
+    private String id;
 
     public Question() {}
 
@@ -16,10 +15,19 @@ public class Question {
         this.name = name;
         this.title = title;
         this.description = description;
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return this.id;
     }
 
     public void postAnswer(String answer) {
-        this.answer = answer;
+        if (this.answer == null) {
+            this.answer = answer;
+        } else {
+            this.answer += "\n" + answer;
+        }
     }
 
     public String getName() {

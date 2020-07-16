@@ -39,5 +39,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_search">Search</string>
     <string name="ques_answered">Answered</string>
+    <string name="ques_answers">Answers</string>
+    <string name="ques_answer_box">Please type your answer here</string>
+    <string name="ques_post">Post</string>
 
 </resources>

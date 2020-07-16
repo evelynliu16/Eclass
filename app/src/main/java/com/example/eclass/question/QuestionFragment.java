@@ -1,72 +1,100 @@
 package com.example.eclass.question;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eclass.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class QuestionFragment extends Fragment {
-    View root;
-    RecyclerView mRecyclerView;
-    FirebaseDatabase database;
-    DatabaseReference databaseReference;
+
+    private DatabaseReference firebaseDatabase;
+    private TextView title, name, description, answer;
+    private EditText newAnswer;
+    private Question question;
+    private Button post;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference("Question");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_question, container, false);
-        mRecyclerView = root.findViewById(R.id.quesRecycle);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.fragment_question, container, false);
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Question");
+        title = root.findViewById(R.id.quesTitle);
+        name = root.findViewById(R.id.quesName);
+        description = root.findViewById(R.id.quesDescrip);
+        answer = root.findViewById(R.id.quesAnswer);
+        newAnswer = root.findViewById(R.id.quesNewAnswer);
+        post = root.findViewById(R.id.quesPost);
 
-        setHasOptionsMenu(true);
+        Bundle bundle = this.getArguments();
+        String id = bundle.getString("id");
+        firebaseDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (id != null) {
+                    question = snapshot.child(id).getValue(Question.class);
+                    setContent();
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         return root;
     }
 
-    @Override
-    public void onStart() {
+    private void setContent() {
+        title.setText(question.getTitle());
+        name.setText("Posted by " + question.getName());
+        description.setText(question.getDescription());
+        if (!question.answered()) {
+            answer.setText("No answer is posted for this question");
+        } else {
+            String answers = question.getAnswer();
+            answer.setText(answers);
+        }
 
-        super.onStart();
-
-        FirebaseRecyclerOptions<Question> options = new FirebaseRecyclerOptions.Builder<Question>()
-                .setQuery(databaseReference, Question.class).build();
-
-        FirebaseRecyclerAdapter<Question, QuestionViewHolder> adapter
-                = new FirebaseRecyclerAdapter<Question, QuestionViewHolder>(options) {
-            @NonNull
+        post.setOnClickListener(new View.OnClickListener() {
             @Override
-            public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(getActivity())
-                        .inflate(R.layout.question_card, parent, false);
-
-                return new QuestionViewHolder(view);
+            public void onClick(View v) {
+                String text = newAnswer.getText().toString();
+                if (text.equals("")) {
+                    String msg = "Please type your answer in the answer box";
+                    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                } else {
+                    question.postAnswer(text);
+                    firebaseDatabase.child(question.getId()).child("answer").setValue(question.getAnswer());
+                    String newText = question.getAnswer();
+                    answer.setText(newText);
+                }
             }
-
-            @Override
-            protected void onBindViewHolder(@NonNull QuestionViewHolder questionViewHolder, int i, @NonNull Question question) {
-                questionViewHolder.setQuestion(question.getTitle(), question.getDescription(), question.answered());
-            }
-        };
-
-        adapter.startListening();
-        mRecyclerView.setAdapter(adapter);
+        });
     }
-
 }
