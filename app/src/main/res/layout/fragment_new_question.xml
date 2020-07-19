@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fragment_background"
+    tools:context=".question.newQuestionFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/new_ques_summary"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/newquesSummary"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="15sp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/new_ques_entersummary"
+        android:inputType="textMultiLine"
+        android:autofillHints="" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_ques_details"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/newquesDescrip"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="2dp"
+        android:textSize="15sp"
+        android:textColor="@color/primaryTextColor"
+        android:background="@drawable/new_ques_details_background"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:hint="@string/new_ques_enterdescrip"
+        android:autofillHints="" />
+
+    <CheckBox
+        android:id="@+id/newquesCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/new_ques_anon" />
+
+    <Button
+        android:id="@+id/newQuesPost"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="end"
+        android:textSize="15sp"
+        android:textColor="@color/primaryTextColor"
+        android:background="@drawable/ques_button"
+        android:text="@string/new_ques_post" />
+</LinearLayout>
