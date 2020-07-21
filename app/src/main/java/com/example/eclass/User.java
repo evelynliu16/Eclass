@@ -6,13 +6,15 @@ public class User {
 
     private String name;
     private String phone;
-    private String password;
+    private boolean instructor;
     private ArrayList<String> questions;
 
-    public User(String name, String phone, String password) {
+    public User() {}
+
+    public User(String name, String phone, boolean instructor) {
         this.name = name;
         this.phone = phone;
-        this.password = password;
+        this.instructor = instructor;
     }
 
     public String getName() {
@@ -23,11 +25,17 @@ public class User {
         return phone;
     }
 
-    public String getPassword() {
-        return password;
+    public void postQuestion(String question) {
+        if (questions == null) {
+            ArrayList<String> questions = new ArrayList<>();
+            this.questions = questions;
+            questions.add(question);
+        } else {
+            questions.add(question);
+        }
     }
 
-    public void postQuestion(String question) {
-        questions.add(question);
+    public ArrayList<String> getQuestions() {
+        return this.questions;
     }
 }

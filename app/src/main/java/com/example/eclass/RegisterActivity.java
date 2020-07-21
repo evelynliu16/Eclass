@@ -32,7 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText number, OTP;
     Button sendOPT, verify;
-    Boolean verified;
 
     String mVerificationId;
     PhoneAuthProvider.ForceResendingToken mResendToken;
@@ -51,59 +50,50 @@ public class RegisterActivity extends AppCompatActivity {
         sendOPT = findViewById(R.id.rgSendCode);
         verify = findViewById(R.id.rgVerify);
 
-        verified = false;
         TAG = "RegisterActivity";
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Student");
 
-        /** Send the verification code if a valid phone number is provided. **/
-        sendOPT.setOnClickListener(new View.OnClickListener() {
+        // Send the verification code if a valid phone number is provided. //
+        sendOPT.setOnClickListener(v -> {
+            final String phoneNumber = number.getText().toString();
 
-            @Override
-            public void onClick(View v) {
-                final String phoneNumber = number.getText().toString();
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.child(phoneNumber).exists()) {
+                        Toast.makeText(RegisterActivity.this, "Phone number already registered", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (phoneNumber.length() == 10) {
+                            Context context = getApplicationContext();
+                            CharSequence text = "Sending message...";
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
 
-                mDatabase.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.child(phoneNumber).exists()) {
-                            Toast.makeText(RegisterActivity.this, "Phone number already registered", Toast.LENGTH_SHORT).show();
+                            sendMsg(phoneNumber);
                         } else {
-                            if (phoneNumber.length() == 10) {
-                                Context context = getApplicationContext();
-                                CharSequence text = "Sending message...";
-                                int duration = Toast.LENGTH_SHORT;
-                                Toast toast = Toast.makeText(context, text, duration);
-                                toast.show();
-
-                                sendMsg(phoneNumber);
-                            } else {
-                                String message = "Please enter a valid phone number";
-                                Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
-                            }
+                            String message = "Please enter a valid phone number";
+                            Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                         }
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-            }
+                }
+            });
         });
 
-        /** Verify and register the user. **/
-        verify.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (OTP.getText().toString().equals("")) {
-                    String msg = "Please enter your verification code";
-                    Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
-                } else {
-                    String code = OTP.getText().toString();
-                    verifyVerificationCode(code);
-                }
+        // Verify and register the user. //
+        verify.setOnClickListener(v -> {
+            if (OTP.getText().toString().equals("")) {
+                String msg = "Please enter your verification code";
+                Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
+            } else {
+                String code = OTP.getText().toString();
+                verifyVerificationCode(code);
             }
         });
     }
@@ -157,29 +147,25 @@ public class RegisterActivity extends AppCompatActivity {
 
     /** Verify the user. Register and sign in if the code is correct, display error messages otherwise. **/
     private void verifyWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        // Verify the user. Otherwise display an error message.
         mAuth.signInWithCredential(credential).addOnCompleteListener(RegisterActivity.this,
-                new OnCompleteListener<AuthResult>() {
+                task -> {
+                    if (task.isSuccessful()) {
+                        Intent intent = new Intent(RegisterActivity.this, UserInfoActivity.class);
+                        intent.putExtra("phoneNumber", number.getText().toString());
+                        intent.putExtra("userID", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                    //Verify the user. Otherwise display an error message.
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Intent intent = new Intent(RegisterActivity.this, UserInfoActivity.class);
-                            intent.putExtra("phoneNumber", number.getText().toString());
-                            intent.putExtra("userID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        //verification unsuccessful.. display an error message
+                        String message = "Something is wrong, we will fix it soon";
 
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            //verification unsuccessful.. display an error message
-                            String message = "Something is wrong, we will fix it soon";
-
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                message = "Incorrect code entered";
-                            }
-                            Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
+                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            message = "Incorrect code entered";
                         }
+                        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

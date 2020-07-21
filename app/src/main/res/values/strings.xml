@@ -5,17 +5,15 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_profile">Profile</string>
-    <string name="action_logout">Log out</string>
-
 
     <!-- Strings used for contents -->
     <string name="menu_homework">Homework</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="menu_recording">Recording</string>
     <string name="menu_question">Question</string>
-    <string name="rec_search">Search</string>
+    <string name="menu_ques_search">Search</string>
+    <string name="menu_ques_add">Add</string>
+    <string name="action_profile">Profile</string>
+    <string name="action_logout">Log out</string>
 
     <!-- Strings used for register and sign in -->
     <string name="phone_number">Phone Number</string>
@@ -24,33 +22,39 @@
     <string name="send_code">Send Code</string>
     <string name="code">Code</string>
     <string name="submit">Submit</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="title_activity_login">Login</string>
     <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Register</string>
     <string name="verify">Verify</string>
     <string name="register">Register</string>
     <string name="name">Name</string>
     <string name="log_out">Log out</string>
+    <string name="login_verification_code">Verification Code</string>
+    <string name="login_send_verif">Send Verfication Code</string>
+
+    <!-- Strings used for homework fragment -->
     <string name="homework">Homework</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings used for recording fragment -->
+    <string name="rec_search">Search</string>
+
+    <!-- Strings used for question fragment -->
     <string name="menu_rec_search">Search</string>
     <string name="ques_answered">Answered</string>
     <string name="ques_answers">Answers</string>
     <string name="ques_answer_box">Please type your answer here</string>
     <string name="ques_post">Post</string>
-    <string name="menu_ques_search">Search</string>
-    <string name="menu_ques_add">Add</string>
     <string name="new_ques_anon">Show my name as anonymous</string>
     <string name="new_ques_summary">Summary</string>
     <string name="new_ques_details">Details</string>
     <string name="new_ques_post">Post my question</string>
     <string name="new_ques_entersummary">Please type the summary for your question here</string>
     <string name="new_ques_enterdescrip">Please type the description for your question here</string>
+    <string name="user_info_instructor">I am an instructor</string>
+    <string name="login_eclass">ECLASS</string>
+    <string name="login_book">book</string>
+
+    <!-- Strings used for menu -->
 
 </resources>

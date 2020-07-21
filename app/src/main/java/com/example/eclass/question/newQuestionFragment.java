@@ -56,6 +56,7 @@ public class newQuestionFragment extends Fragment {
                 }
                 Question newQues = new Question(name, summary.getText().toString(), details.getText().toString());
                 database.child(newQues.getId()).setValue(newQues);
+                user.postQuestion(newQues.getId());
             }
         });
 

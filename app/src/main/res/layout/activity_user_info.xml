@@ -6,37 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".UserInfoActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Name:"
+        android:fontFamily="@font/lobster_two_bold"
+        android:textSize="15sp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/primaryTextColor"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="191dp"
+        app:layout_constraintBottom_toTopOf="@+id/rgName"
+        app:layout_constraintStart_toStartOf="@+id/rgName"/>
+
     <EditText
         android:id="@+id/rgName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="200dp"
         android:ems="10"
         android:hint="@string/name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="name" />
 
-    <EditText
-        android:id="@+id/rgPassword"
+    <CheckBox
+        android:id="@+id/rgInstructor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/rgName"
-        app:layout_constraintTop_toBottomOf="@+id/rgName" />
+        android:text="@string/user_info_instructor"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgName"/>
 
     <Button
         android:id="@+id/rgRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:text="@string/register"
+        android:background="@drawable/ques_button"
+        android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/rgInstructor"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
