@@ -32,6 +32,9 @@
     <string name="log_out">Log out</string>
     <string name="login_verification_code">Verification Code</string>
     <string name="login_send_verif">Send Verfication Code</string>
+    <string name="login_eclass">ECLASS</string>
+    <string name="login_book">book</string>
+    <string name="user_info_fill_info">Please fill in your personal information</string>
 
     <!-- Strings used for homework fragment -->
     <string name="homework">Homework</string>
@@ -50,10 +53,8 @@
     <string name="new_ques_details">Details</string>
     <string name="new_ques_post">Post my question</string>
     <string name="new_ques_entersummary">Please type the summary for your question here</string>
-    <string name="new_ques_enterdescrip">Please type the description for your question here</string>
+    <string name="new_ques_type_descrip">\u0020Please type the description for your question here</string>
     <string name="user_info_instructor">I am an instructor</string>
-    <string name="login_eclass">ECLASS</string>
-    <string name="login_book">book</string>
 
     <!-- Strings used for menu -->
 

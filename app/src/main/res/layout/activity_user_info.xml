@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_background"
     tools:context=".UserInfoActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Name:"
+        android:text="@string/user_info_fill_info"
         android:fontFamily="@font/lobster_two_bold"
-        android:textSize="15sp"
-        android:layout_marginBottom="5dp"
+        android:textSize="18sp"
+        android:layout_marginTop="50dp"
         android:textColor="@color/primaryTextColor"
         tools:layout_editor_absoluteX="82dp"
         tools:layout_editor_absoluteY="191dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/rgName"
-        app:layout_constraintStart_toStartOf="@+id/rgName"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/rgName"
@@ -28,6 +31,9 @@
         android:ems="10"
         android:hint="@string/name"
         android:inputType="textPersonName"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="15sp"
+        android:textColorHint="@color/primaryTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -49,6 +55,8 @@
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:background="@drawable/ques_button"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="15sp"
         android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

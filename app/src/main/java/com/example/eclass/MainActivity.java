@@ -54,16 +54,16 @@ public class MainActivity extends AppCompatActivity {
                 .setAction("Action", null).show());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        View headView = navigationView.getHeaderView(0);
-        ImageView imgProfile = headView.findViewById(R.id.navPic);
-        name = headView.findViewById(R.id.navName);
+        View header = navigationView.getHeaderView(0);
+        ImageView imgProfile = header.findViewById(R.id.navPic);
+        name = header.findViewById(R.id.navName);
 
         // Change profile picture. //
         imgProfile.setOnClickListener(v -> {
 
         });
 
-        logOut = headView.findViewById(R.id.navLogOut);
+        logOut = header.findViewById(R.id.navLogOut);
         logOut.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Intent toMain = new Intent(MainActivity.this, LoginActivity.class);

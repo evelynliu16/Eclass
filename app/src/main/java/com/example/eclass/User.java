@@ -25,6 +25,11 @@ public class User {
         return phone;
     }
 
+    public boolean isInstructor() {
+       return this.instructor;
+    }
+
+
     public void postQuestion(String question) {
         if (questions == null) {
             ArrayList<String> questions = new ArrayList<>();

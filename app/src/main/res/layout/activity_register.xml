@@ -4,21 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_background"
     tools:context=".RegisterActivity">
 
     <EditText
         android:id="@+id/rgPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="276dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:autofillHints="phone"
         android:ems="10"
         android:hint="@string/phone_number"
+        android:textColorHint="@color/primaryTextColor"
         android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rgSendCode"
-        app:layout_constraintHorizontal_bias="0.203"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,36 +29,43 @@
         android:id="@+id/rgSendCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
-        android:layout_marginRight="13dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:text="@string/send_code"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="15sp"
+        android:background="@drawable/ques_button"
         app:layout_constraintBaseline_toBaselineOf="@+id/rgPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rgPhone" />
 
     <EditText
         android:id="@+id/rgCode"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="250dp"
         android:autofillHints="Code"
         android:ems="10"
         android:hint="@string/code"
         android:inputType="number"
+        android:textColorHint="@color/primaryTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rgSendCode" />
 
     <Button
         android:id="@+id/rgVerify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="98dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginRight="160dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/verify"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="15sp"
+        android:background="@drawable/ques_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rgCode" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class UserInfoActivity extends AppCompatActivity {
 
-    EditText name, password;
+    EditText name;
     CheckBox instructor;
     Button register;
     String phone;
@@ -30,8 +30,6 @@ public class UserInfoActivity extends AppCompatActivity {
         register = findViewById(R.id.rgRegister);
         instructor = findViewById(R.id.rgInstructor);
 
-        phone = getIntent().getStringExtra("phoneNumber");
-
         mDatabase = FirebaseDatabase.getInstance().getReference("Student");
 
         //Register the user and direct to main activity.
@@ -39,10 +37,8 @@ public class UserInfoActivity extends AppCompatActivity {
             if (name.getText().toString().equals("")) {
                 String msg = "Please enter your name";
                 Toast.makeText(UserInfoActivity.this, msg, Toast.LENGTH_SHORT).show();
-            } else if (password.getText().toString().equals("")) {
-                String msg = "Please set your password";
-                Toast.makeText(UserInfoActivity.this, msg, Toast.LENGTH_SHORT).show();
             } else {
+                phone = getIntent().getStringExtra("phoneNumber");
                 saveUser(name.getText().toString(), phone, instructor.isChecked());
             }
         });
