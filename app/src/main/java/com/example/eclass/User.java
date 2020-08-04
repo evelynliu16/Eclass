@@ -1,5 +1,7 @@
 package com.example.eclass;
 
+import android.net.Uri;
+
 import java.util.ArrayList;
 
 public class User {
@@ -8,6 +10,7 @@ public class User {
     private String phone;
     private boolean instructor;
     private ArrayList<String> questions;
+    private String profilePic;
 
     public User() {}
 
@@ -27,6 +30,14 @@ public class User {
 
     public boolean isInstructor() {
        return this.instructor;
+    }
+
+    public void setProfilePic(String uri) {
+        this.profilePic = uri;
+    }
+
+    public String getProfilePic() {
+        return this.profilePic;
     }
 
 

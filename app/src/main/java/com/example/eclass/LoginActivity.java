@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             mDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String number = phone.getText().toString();
+                    String number = "+1" + phone.getText().toString();
                     if (!snapshot.child(number).exists()) {
                         Toast.makeText(LoginActivity.this, "Phone number is not registered", Toast.LENGTH_SHORT).show();
                     } else {

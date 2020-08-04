@@ -81,19 +81,16 @@ public class QuestionFragment extends Fragment {
             answer.setText(answers);
         }
 
-        post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String text = newAnswer.getText().toString();
-                if (text.equals("")) {
-                    String msg = "Please type your answer in the answer box";
-                    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-                } else {
-                    question.postAnswer(text);
-                    firebaseDatabase.child(question.getId()).child("answer").setValue(question.getAnswer());
-                    String newText = question.getAnswer();
-                    answer.setText(newText);
-                }
+        post.setOnClickListener(v -> {
+            String text = newAnswer.getText().toString();
+            if (text.equals("")) {
+                String msg = "Please type your answer in the answer box";
+                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+            } else {
+                question.postAnswer(text);
+                firebaseDatabase.child(question.getId()).child("answer").setValue(question.getAnswer());
+                String newText = question.getAnswer();
+                answer.setText(newText);
             }
         });
     }
