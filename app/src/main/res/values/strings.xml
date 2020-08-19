@@ -55,8 +55,8 @@
     <string name="new_ques_entersummary">Please type the summary for your question here</string>
     <string name="new_ques_type_descrip">\u0020Please type the description for your question here</string>
     <string name="user_info_instructor">I am an instructor</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings used for profile page -->
     <string name="pf_upload">Upload image</string>
     <string name="pf_name">name</string>
     <string name="pf_save_name">Save my name</string>

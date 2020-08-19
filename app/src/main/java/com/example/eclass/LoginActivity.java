@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     String mVerificationId;
     PhoneAuthProvider.ForceResendingToken mResendToken;
     String TAG;
+    String phoneNumber;
+    boolean codeSent;
 
 
     @Override
@@ -46,29 +48,35 @@ public class LoginActivity extends AppCompatActivity {
         Button signinButton = findViewById(R.id.lgSignIn);
         Button registerButton = findViewById(R.id.lgRegister);
         Button sendVerif = findViewById(R.id.lgSend);
+        codeSent = false;
 
         sendVerif.setOnClickListener(v -> {
-            if (phone.getText().toString().equals("")) {
-                String msg = "Please enter your phone number";
-                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-            mDatabase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String number = "+1" + phone.getText().toString();
-                    if (!snapshot.child(number).exists()) {
-                        Toast.makeText(LoginActivity.this, "Phone number is not registered", Toast.LENGTH_SHORT).show();
+                    if (phone.getText().toString().equals("")) {
+                        String msg = "Please enter your phone number";
+                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                     } else {
-                        sendMsg(number);
+                        mDatabase.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String number = "+1" + phone.getText().toString();
+                                if (!snapshot.child(number).exists()) {
+                                    Toast.makeText(LoginActivity.this, "Phone number is not registered", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    sendMsg(number);
+                                    phoneNumber = number;
+                                    codeSent = true;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }
+        );
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        });
 
         // Sign in. //
         signinButton.setOnClickListener(v -> {
@@ -77,6 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
             } else if (code.getText().toString().equals("")) {
                 String msg = "Please enter the verification code";
+                Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+            } else if (!codeSent) {
+                String msg = "Please send the verification code";
                 Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
             } else {
                 verifyVerificationCode(code.getText().toString());
@@ -95,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
      * Send the verification code to the user.
      **/
     private void sendMsg(String number) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber("+1" + number, 60, TimeUnit.SECONDS, this, mCallbacks);
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(number, 60, TimeUnit.SECONDS, this, mCallbacks);
     }
 
 
@@ -104,10 +115,10 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onVerificationCompleted(PhoneAuthCredential credential) {
-            String verfification = credential.getSmsCode();
-            if (verfification != null) {
+            String verification = credential.getSmsCode();
+            if (verification != null) {
                 Log.w(TAG, "Verification Completed");
-                code.setText(verfification);
+                code.setText(verification);
             }
         }
 
@@ -126,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             // by combining the code with a verification ID.
             Log.d(TAG, "Code sent" + verificationId);
 
-            // Save verification ID and resending token so we can use them later
+            // Save verification ID and resending token so they can be used later
             mVerificationId = verificationId;
             mResendToken = token;
         }
@@ -138,8 +149,8 @@ public class LoginActivity extends AppCompatActivity {
     private void verifyVerificationCode(String code) {
         mAuth = FirebaseAuth.getInstance();
 
-        PhoneAuthCredential crendential = PhoneAuthProvider.getCredential(mVerificationId, code);
-        verifyWithPhoneAuthCredential(crendential);
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+        verifyWithPhoneAuthCredential(credential);
     }
 
     /**
@@ -151,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                 task -> {
                     if (task.isSuccessful()) {
                         Intent intent = new Intent(this, MainActivity.class);
-                        intent.putExtra("phoneNumber", phone.getText().toString());
+                        intent.putExtra("phoneNumber", phoneNumber);
 
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

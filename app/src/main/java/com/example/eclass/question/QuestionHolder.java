@@ -12,7 +12,7 @@ import com.example.eclass.R;
 public class QuestionHolder extends RecyclerView.ViewHolder{
 
     TextView mTitle, mDescrip;
-    CheckBox answered;
+    TextView answered;
 
     public QuestionHolder(@NonNull View itemView) {
         super(itemView);
@@ -24,6 +24,8 @@ public class QuestionHolder extends RecyclerView.ViewHolder{
     public void setQuestion(String title, String description, boolean answer) {
         mTitle.setText(title);
         mDescrip.setText(description);
-        answered.setChecked(answer);
+        if (answer) {
+            answered.setText(R.string.ques_answered);
+        }
     }
 }
