@@ -1,10 +1,6 @@
 package com.example.eclass.question;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +9,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.example.eclass.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 
 public class QuestionFragment extends Fragment {
@@ -29,13 +26,15 @@ public class QuestionFragment extends Fragment {
     private TextView title, name, description, answer;
     private EditText newAnswer;
     private Question question;
-    private Button post;
+    private Button post, goBack;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("Question");
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +51,7 @@ public class QuestionFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         String id = bundle.getString("id");
+
         firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -72,10 +72,11 @@ public class QuestionFragment extends Fragment {
 
     private void setContent() {
         title.setText(question.getTitle());
-        name.setText("Posted by " + question.getName());
+        String posted = "posted by " + question.getName();
+        name.setText(posted);
         description.setText(question.getDescription());
         if (!question.answered()) {
-            answer.setText("No answer is posted for this question");
+            answer.setText(R.string.ques_no_answer_posted);
         } else {
             String answers = question.getAnswer();
             answer.setText(answers);

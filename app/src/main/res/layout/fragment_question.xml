@@ -105,6 +105,4 @@
         android:background="@drawable/ques_button"
         android:textSize="15sp"
         android:text="@string/ques_post" />
-
-
 </LinearLayout>

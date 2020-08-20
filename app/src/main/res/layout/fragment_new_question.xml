@@ -65,6 +65,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:padding="5dp"
         android:hint="@string/new_ques_type_descrip"
         android:autofillHints="" />
 

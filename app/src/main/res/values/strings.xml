@@ -38,6 +38,8 @@
 
     <!-- Strings used for homework fragment -->
     <string name="homework">Homework</string>
+    <string name="homework_save">Save</string>
+    <string name="homework_close">Close</string>
 
     <!-- Strings used for recording fragment -->
     <string name="rec_search">Search</string>
@@ -53,7 +55,7 @@
     <string name="new_ques_details">Details</string>
     <string name="new_ques_post">Post my question</string>
     <string name="new_ques_entersummary">Please type the summary for your question here</string>
-    <string name="new_ques_type_descrip">\u0020Please type the description for your question here</string>
+    <string name="new_ques_type_descrip">Please type the description for your question here</string>
     <string name="user_info_instructor">I am an instructor</string>
 
     <!-- Strings used for profile page -->
@@ -62,6 +64,9 @@
     <string name="pf_save_name">Save my name</string>
     <string name="pf_save_image">Save my profile picture</string>
     <string name="pf_profile_image">profile</string>
+    <string name="ques_no_answer_posted">No answer is posted for this question</string>
+    <string name="ques_posted_by">\"Posted by \"</string>
+    <string name="ques_go_back">Go Back</string>
 
     <!-- Strings used for menu -->
 

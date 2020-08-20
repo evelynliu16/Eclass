@@ -1,13 +1,18 @@
 package com.example.eclass;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,16 +25,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.eclass.question.NewQuestionFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
@@ -42,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView name;
     Button logOut;
     ImageView profilePic;
+    Dialog myDialog;
+    public static FloatingActionButton fab;
     public static Toolbar toolbar;
-    static User user;
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +64,11 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
-        ImageView imgProfile = header.findViewById(R.id.navPic);
         name = header.findViewById(R.id.navName);
         profilePic = header.findViewById(R.id.navPic);
+
+        fab = findViewById(R.id.fab);
+        fab.setVisibility(View.GONE);
 
         logOut = header.findViewById(R.id.navLogOut);
         logOut.setOnClickListener(v -> {
@@ -137,11 +143,8 @@ public class MainActivity extends AppCompatActivity {
                     if (user.getProfilePic() != null) {
                         Picasso.get().load(user.getProfilePic().toString()).into(profilePic);
                     }
-
-                    if (user.isInstructor()) {
-                        FloatingActionButton fab = findViewById(R.id.fab);
-                        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show());
+                    if (!user.isInstructor()) {
+                        fab.setVisibility(View.VISIBLE);
                     }
                 }
 
