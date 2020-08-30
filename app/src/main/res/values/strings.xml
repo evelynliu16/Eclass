@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">Eclass</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
     <!-- Strings used for contents -->
@@ -43,6 +39,9 @@
 
     <!-- Strings used for recording fragment -->
     <string name="rec_search">Search</string>
+    <string name="rec_video_title">Video Title</string>
+    <string name="rec_choose_video">Choose video</string>
+    <string name="rec_upload">Upload</string>
 
     <!-- Strings used for question fragment -->
     <string name="menu_rec_search">Search</string>
@@ -67,6 +66,10 @@
     <string name="ques_no_answer_posted">No answer is posted for this question</string>
     <string name="ques_posted_by">\"Posted by \"</string>
     <string name="ques_go_back">Go Back</string>
+    <string name="menu_rec_add">Add</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ques_answer_anon">Post my answer anonymously</string>
 
     <!-- Strings used for menu -->
 

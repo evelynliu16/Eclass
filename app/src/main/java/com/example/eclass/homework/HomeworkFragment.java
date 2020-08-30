@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.eclass.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.example.eclass.MainActivity.fab;
+import static com.example.eclass.MainActivity.user;
 
 
 public class HomeworkFragment extends Fragment {
@@ -34,6 +37,7 @@ public class HomeworkFragment extends Fragment {
     CalendarView calender;
     Dialog myDialog;
     private DatabaseReference mDatabase;
+
     String date;
     String homework1;
 
@@ -46,6 +50,10 @@ public class HomeworkFragment extends Fragment {
         calender = root.findViewById(R.id.hmCalender);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Homework");
         myDialog = new Dialog(requireContext());
+
+        if (user != null && user.isInstructor()) {
+            fab.setVisibility(View.VISIBLE);
+        }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         final String today = sdf.format(new Date(calender.getDate()));
@@ -91,12 +99,13 @@ public class HomeworkFragment extends Fragment {
             });
         });
 
-        fab.setOnClickListener(v -> showPopup(v));
+        fab.setOnClickListener(v -> showPopup());
+
         return root;
     }
 
 
-    public void showPopup(View v) {
+    public void showPopup() {
         myDialog.setContentView((R.layout.homework_popup));
 
         Window window = myDialog.getWindow();

@@ -1,18 +1,13 @@
 package com.example.eclass;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView name;
     Button logOut;
     ImageView profilePic;
-    Dialog myDialog;
     public static FloatingActionButton fab;
     public static Toolbar toolbar;
     public static User user;
@@ -57,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("Student");
 
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         profilePic = header.findViewById(R.id.navPic);
 
         fab = findViewById(R.id.fab);
-        fab.setVisibility(View.GONE);
 
         logOut = header.findViewById(R.id.navLogOut);
         logOut.setOnClickListener(v -> {
@@ -104,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(toLogin);
             return true;
         });
-        
+
         // Add on click listener. //
         add.setOnMenuItemClickListener(item -> {
             ProfileFragment fragment = new ProfileFragment();
@@ -141,10 +133,10 @@ public class MainActivity extends AppCompatActivity {
                     user = snapshot.child(phoneNumber).getValue(User.class);
                     name.setText(user.getName());
                     if (user.getProfilePic() != null) {
-                        Picasso.get().load(user.getProfilePic().toString()).into(profilePic);
+                        Picasso.get().load(user.getProfilePic()).into(profilePic);
                     }
                     if (!user.isInstructor()) {
-                        fab.setVisibility(View.VISIBLE);
+                        fab.setVisibility(View.GONE);
                     }
                 }
 

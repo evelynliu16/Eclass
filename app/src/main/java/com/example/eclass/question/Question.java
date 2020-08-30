@@ -26,7 +26,7 @@ public class Question {
         if (this.answer == null) {
             this.answer = answer;
         } else {
-            this.answer += "\n" + answer;
+            this.answer += "\n" + "\n" + answer;
         }
     }
 

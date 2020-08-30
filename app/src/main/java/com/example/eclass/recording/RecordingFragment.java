@@ -11,6 +11,8 @@ import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,14 +23,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import static com.example.eclass.MainActivity.fab;
+import static com.example.eclass.MainActivity.user;
+
 
 public class RecordingFragment extends Fragment {
 
     RecyclerView mRecyclerView;
-    FirebaseDatabase database;
     DatabaseReference databaseReference;
     View root;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,8 +42,7 @@ public class RecordingFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Video");
+        databaseReference = FirebaseDatabase.getInstance().getReference("Video");
 
         setHasOptionsMenu(true);
 
@@ -49,10 +51,13 @@ public class RecordingFragment extends Fragment {
 
     @Override
     public void onStart() {
-
         super.onStart();
         FirebaseRecyclerOptions<Video> options = new FirebaseRecyclerOptions.Builder<Video>()
                 .setQuery(databaseReference, Video.class).build();
+
+        if (user != null && user.isInstructor()) {
+            fab.setVisibility(View.VISIBLE);
+        }
 
         FirebaseRecyclerAdapter<Video, RecordingHolder> firebaseRecycleAdapter =
                 new FirebaseRecyclerAdapter<Video, RecordingHolder>(options) {
@@ -73,9 +78,21 @@ public class RecordingFragment extends Fragment {
 
         firebaseRecycleAdapter.startListening();
         mRecyclerView.setAdapter(firebaseRecycleAdapter);
+
+
+        fab.setOnClickListener(v -> {
+            UploadRecordingFragment fragment = new UploadRecordingFragment();
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.nav_host_fragment, fragment);
+            transaction.commit();
+        });
+
     }
 
-    /** Implement search view. **/
+    /**
+     * Implement search view.
+     **/
     private void firebaseSearch(String text) {
         String query = text.toLowerCase();
         Query firebaseQuery = databaseReference.orderByChild("search").startAt(query).endAt(query + "\uf8ff");
@@ -106,9 +123,8 @@ public class RecordingFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.recording, menu);
-        MenuItem item = menu.findItem(R.id.recSearch);
-
-        SearchView searchView = (SearchView) item.getActionView();
+        MenuItem search = menu.findItem(R.id.recSearch);
+        SearchView searchView = (SearchView) search.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -124,3 +140,4 @@ public class RecordingFragment extends Fragment {
         });
     }
 }
+

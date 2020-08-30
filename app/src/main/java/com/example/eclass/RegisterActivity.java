@@ -152,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
                 task -> {
                     if (task.isSuccessful()) {
                         Intent intent = new Intent(RegisterActivity.this, UserInfoActivity.class);
-                        intent.putExtra("phoneNumber", number.getText().toString());
+                        intent.putExtra("phoneNumber", "+1" + number.getText().toString());
 
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

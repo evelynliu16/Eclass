@@ -29,17 +29,16 @@
         android:textSize="13sp"
         android:textColor="@color/primaryTextColor"
         android:layout_gravity="end"
-        android:layout_marginTop="3dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"/>
+        />
 
     <TextView
         android:id="@+id/quesDescrip"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_height="70dp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
         android:gravity="start"
@@ -60,32 +59,32 @@
         android:background="@drawable/ques_answers_background"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp" />
 
     <TextView
         android:id="@+id/quesAnswer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="3dp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
+        android:scrollbars="horizontal"
         android:textColor="@color/primaryTextColor"
         android:textSize="15sp" />
 
     <EditText
         android:id="@+id/quesNewAnswer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:padding="5dp"
+        android:layout_marginBottom="15dp"
+        android:padding="7dp"
         android:ems="10"
         android:scrollbars="vertical"
         android:gravity="start|top"
@@ -96,13 +95,21 @@
         android:background="@drawable/ques_answerbox_background"
         android:autofillHints="" />
 
+    <CheckBox
+        android:id="@+id/quesAnon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="@string/ques_answer_anon" />
+
     <Button
         android:id="@+id/quesPost"
         android:layout_width="60dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_gravity="end"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:background="@drawable/ques_button"
         android:textSize="15sp"
         android:text="@string/ques_post" />
+
 </LinearLayout>

@@ -1,10 +1,12 @@
 package com.example.eclass.question;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static com.example.eclass.MainActivity.fab;
+import static com.example.eclass.MainActivity.user;
+
 
 public class QuestionFragment extends Fragment {
 
@@ -26,14 +31,14 @@ public class QuestionFragment extends Fragment {
     private TextView title, name, description, answer;
     private EditText newAnswer;
     private Question question;
-    private Button post, goBack;
+    private CheckBox anon;
+    private Button post;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("Question");
     }
-
 
 
     @Override
@@ -48,6 +53,9 @@ public class QuestionFragment extends Fragment {
         answer = root.findViewById(R.id.quesAnswer);
         newAnswer = root.findViewById(R.id.quesNewAnswer);
         post = root.findViewById(R.id.quesPost);
+        anon = root.findViewById(R.id.quesAnon);
+        answer.setMovementMethod(new ScrollingMovementMethod());
+        description.setMovementMethod(new ScrollingMovementMethod());
 
         Bundle bundle = this.getArguments();
         String id = bundle.getString("id");
@@ -88,10 +96,19 @@ public class QuestionFragment extends Fragment {
                 String msg = "Please type your answer in the answer box";
                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
             } else {
-                question.postAnswer(text);
+                String name;
+                if (anon.isChecked()) {
+                    name = "Anonymous: ";
+                } else {
+                    name = user.getName() + ": ";
+                }
+
+                question.postAnswer(name + text);
                 firebaseDatabase.child(question.getId()).child("answer").setValue(question.getAnswer());
                 String newText = question.getAnswer();
                 answer.setText(newText);
+                newAnswer.setText("");
+                anon.setChecked(false);
             }
         });
     }

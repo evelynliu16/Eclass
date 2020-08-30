@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import static com.example.eclass.MainActivity.fab;
+
 
 public class QuestionListFragment extends Fragment {
     View root;
@@ -36,6 +38,8 @@ public class QuestionListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_question_list, container, false);
+
+        fab.setVisibility(View.GONE);
 
         mRecyclerView = root.findViewById(R.id.queslistRecycle);
         mRecyclerView.setHasFixedSize(true);

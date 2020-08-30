@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/nav_background"
+    tools:context=".recording.UploadRecordingFragment">
+
+    <VideoView
+        android:id="@+id/uploadVid"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/uploadTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:visibility="gone"
+        android:inputType="text"
+        android:hint="@string/rec_video_title"
+        android:layout_margin="15dp"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="246dp"
+        app:layout_constraintTop_toBottomOf="@id/uploadVid"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/uploadChoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rec_choose_video"
+        android:layout_marginBottom="70dp"
+        android:padding="10dp"
+        android:background="@drawable/ques_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/uploadUpload" />
+
+    <Button
+        android:id="@+id/uploadUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rec_upload"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/ques_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/uploadProgress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        tools:layout_editor_absoluteX="181dp"
+        tools:layout_editor_absoluteY="494dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/uploadIcon"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:src="@drawable/icon_video"
+        android:layout_marginTop="40dp"
+        tools:layout_editor_absoluteX="133dp"
+        tools:layout_editor_absoluteY="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
