@@ -1,5 +1,3 @@
-from IPython.display import HTML, display
-
 # EClass
 **EClass is an Android app that can be used by instructors and students to communicate with each other to gain a better learning experience. The app supports features such as checking assignments, asking and answering questions, and watching recordings posted by instructors. Instructors have access to posting videos and assignments.**
 
@@ -11,7 +9,7 @@ Phone number is required for first-time registration and same phone number needs
 
 ## Homework
 Students can view homework assignments on different date and instructors have access to post homework
-<br>
+
 <img src="pics/homework.png" width="30%">
 
 ## Question
