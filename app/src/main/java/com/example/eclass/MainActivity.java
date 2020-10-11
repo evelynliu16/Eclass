@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Passing each menu ID as a set of Ids because each menu should be considered as top level destinations. //
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_homework, R.id.nav_question_list, R.id.nav_recording)
+                R.id.nav_homework, R.id.nav_question_list, R.id.nav_recording, R.id.nav_profile)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -86,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem add = menu.findItem(R.id.actionProfile);
         MenuItem logOut = menu.findItem(R.id.actionLogout);
 
         // Log out on click listener. //
@@ -97,15 +94,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        // Add on click listener. //
-        add.setOnMenuItemClickListener(item -> {
-            ProfileFragment fragment = new ProfileFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.nav_host_fragment, fragment);
-            transaction.commit();
-            return true;
-        });
         return true;
     }
 

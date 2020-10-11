@@ -134,6 +134,9 @@ public class UploadRecordingFragment extends Fragment {
 
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(requireActivity(), "Video uploaded successfully", Toast.LENGTH_SHORT).show();
+                    video_title.setVisibility(View.GONE);
+                    videoView.setVisibility(View.GONE);
+                    icon.setVisibility(View.VISIBLE);
 
                 } else {
                     Toast.makeText(requireContext(), "Upload failed. Please try again later", Toast.LENGTH_SHORT).show();
