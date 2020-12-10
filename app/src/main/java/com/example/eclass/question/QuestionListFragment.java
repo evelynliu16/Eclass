@@ -84,19 +84,16 @@ public class QuestionListFragment extends Fragment {
 
 
                 // Set on click listener for view holder. //
-                questionViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("id", question.getId());
-                        QuestionFragment fragment = new QuestionFragment();
-                        fragment.setArguments(bundle);
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.addToBackStack(null);
-                        transaction.replace(R.id.nav_host_fragment, fragment);
-                        transaction.commit();
-                    }
+                questionViewHolder.itemView.setOnClickListener(v -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", question.getId());
+                    QuestionFragment fragment = new QuestionFragment();
+                    fragment.setArguments(bundle);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.addToBackStack(null);
+                    transaction.replace(R.id.nav_host_fragment, fragment);
+                    transaction.commit();
                 });
             }
         };
